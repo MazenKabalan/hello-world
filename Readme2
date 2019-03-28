@@ -1,0 +1,57 @@
+Cassandra 
+
+File: /home/mazen/Downloads/CNAM/C1/projet/presentation cassandra Page 1 of 3
+bonsoir
+je suis mazen kabalan
+ma presentation est a propos du database apache cassandra
+une prise en main rapide pour s'apprendre 
+a modeliser un probleme dans une base de donnees cassandra 
+et apprendre les fonctions de base : insert, update, delete ...
+------------------------------
+voici le plan, 
+au debut une petite presentation, 
+ensuite l'architecture, 
+puis le modele de donnees, 
+avant de parler du langage CQL (cassandra query langage)
+et enfin expliquer un peu de la denormalisation
+------------------------------
+presentation cassandra
+cassandra est une base de donnee NOSQL (not only SQL) 
+orientee colonne (on verra apres)
+cassandra est developpe au debut par Facebook en 2007 pour sa messagerie interne,
+en 2008, Facebook donne cassandra a Apache, 
+ce projet devient a partir de 2010 un "top-level-project",
+ce qui permet de l'enrichir et d'y ajouter de nouvelles fonctionnalites 
+cassandra est un projet open source,
+maintenant, est utilise par plusieurs entreprise, 
+on cite quelque uns d'entre eux: 
+Twiter, Netflix, Cisco WebEx
+------------------------------
+quels sont les concepts de cassandra,
+cassandra reprend les concepts de deux base existantes:
+1- prend le modele de donnees oriente colonne 
+ et le mecanisme de persistence sur disque de Big Table, cree par google
+2- et prend aussi l'architecture distribuee
+ sans noeud maitre de Dynamo cree par Amazon
+------------------------------
+avantages:
+1- tolerance aux pannes grace au mecanisme de replication
+ de donnees sur plusieurs noeud
+2- architecture decentralise, pas de noeud maitre
+3- systeme elastique, la scalabilite est lineaire, 
+ le debit de lecture et d'ecriture augmente 
+ lorsqu'un nouveau serveure est ajoute dans le system ou le custer, 
+ par ailleurs, cassandra assure qu'il n'aura pas d'indisponibilite du systeme
+ ni d'interruption au niveau des applications
+4- haute disponibilite, due a la replication de donnee, et a la possibilite 
+ de specifier le niveau de coherance concernant la lecture et l'ecriture
+ (tueable consistency: equivalence between availability and latency)
+ cassandra ne dispose pas de transactions, ecriture rapide dans le memoires, 
+ plus rapide que les SGBDR
+5- cassandra est un projet open source
+Inconvenients:
+1- pas d'interface graphique
+2- difficulte a l'utilisation
+3- limitation de la taille des donnees
+------------------------------
+Architecture de cassandra:
