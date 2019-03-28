@@ -55,3 +55,79 @@ Inconvenients:
 3- limitation de la taille des donnees
 ------------------------------
 Architecture de cassandra:
+
+File: /home/mazen/Downloads/CNAM/C1/projet/presentation cassandra Page 2 of 3
+cassandra est une base de donnes contenue dans un cluster,
+un cluster est un regroupement de plusieurs noeudsou serveur physique,
+qui communiquent entre eux pour la gestion de donnees
+les donnees sont repaarties sur plusieurs noeuds, 
+et peuvent etre reparties sur 1 a N noeuds selon la configuration
+------------------------------
+Modele de donnees:
+Colonne: la plus petite unite de donnee de cassandra, 
+constitue du triplet : nom, valeur et timestamp
+ligne: est un ensemble de colonnes, est identifie par un cle
+est l'equivalent d'un ligne (row) dans SGBDR (dinc est un enregistrement)
+cle: code sur 128 bits, represente sous la forme groupes de caracteres 
+hexadecimaux miniscules separes par des tiret, 
+la premire partie est le cle de partition qui identifie le noeud qui doit
+contenir le ligne
+il y a possibilite de definir des cles primaires comme dans SGBDR, 
+la premiere colonne sera utilise comme cle de partition
+column family: est un regroupement de lignes, equivalent a une table dans SGBDR
+remarquons que deux lignes peuvent contenir de differents nombres de colonnes, 
+Il existe deux types de familles de colonnes
+statique : les colonnes sont définies lors de la création 
+ ou modification de la famille de colonnes ;
+dynamique : les colonnes sont définies lors 
+ de la création ou modification d'une ligne.
+keyspace: est un regroupement de column family, 
+est l'equivalent d'un schema dans SGBDR
+------------------------------
+langage CQL : lire de l'ecran
+------------------------------
+Modélisation rime avec dénormalisation:
+Étant donné que Cassandra est contenue dans un cluster, 
+les jointures n'existent pas. Il faut donc dénormaliser le modèle.
+Relation one to many:
+Voici une relation one to many (un à plusieurs) dans un modèle normalisé.
+Les jointures n'étant pas possible, on dénormalise la relation.
+donc on ajoute la colonne categorie lors de la creation
+ du column family Instruments
+Relation many to many:
+Voici un exemple de ralation many to many (plusieurs à plusieurs). 
+Un utilisateurs peux commenter plusieurs livre, 
+et un livre peut être commenté par plusieurs utilisateurs.
+Le but est de pouvoir retrouver tous les commentaires
+d'un utilisateur et tous les commentaires d'un livre.
+On est donc obligé de dénormaliser et de faire deux tables.
+une premiere table pour les commentaires par livre
+
+File: /home/mazen/Downloads/CNAM/C1/projet/presentation cassandra Page 3 of 3
+la deuxieme pour les commentaires par utilisataires
+pourquoi faire deux tables?
+comme l'on a deja dit, l'ordre des columnes dans le cle primaire 
+d'une table est essentiel dans la repartition des lignes sur les noeuds,
+toujours la premiere colonne, c'est qui identifie le numero du noeuds de residence
+par consequence, dans le but de grouper les commentaires sur un livre 
+dans le meme endroi (noeud), il faut cree une table 
+ayant le premier colonne de son cle comme etant l'identifiant unique d'un livre
+et vice versa dans le cas des commetaires par utilisateur
+------------------------------
+a propos du telechargement et installation:
+Apache Cassandra peut être téléchargée à partir du site d'Apache 
+ou directement sur le site de DataStax.
+Via le site Apache : vous disposerez alors d'une solution minimale qui ne contiendra 
+que la base de données Cassandra. Le fichier d'installation se limitera à une archive 
+ZIP 
+qu'il faudra décompresser. 
+Via le site de DataStax : vous trouverez alors deux distributions. 
+La première appelée DataStax Entreprise Edition, payante,
+La seconde appelée DataStax Community Edition, gratuite, 
+Veuillez vous assurer que vous disposez d'une machine virtuelle Java. 
+De mon côté un JDK 8 est installé.
+installation sur windows est plus facile, se fait via a wizard,
+moi je l'ai installe sur ubunto,
+------------------------------
+exercice simplifiee
+
